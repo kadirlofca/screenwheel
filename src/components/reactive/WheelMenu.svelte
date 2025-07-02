@@ -1,14 +1,10 @@
 <script lang="ts">
-    const navigationLinks: string[] = [
-        "Home",
-        "About Me",
-        "Experience",
-        "Contact",
-    ]
+    let { items } = $props();
+
+    const navigationLinks: string[] = items;
 
     function getIndexDistanceToSelectedNavigationLink(navigationLink: string): number {
         
-
         return 0;
     }
 </script>

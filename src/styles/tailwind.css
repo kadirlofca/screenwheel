@@ -5,9 +5,9 @@
 
 @theme {
   /* COLOR */
-  --color-primary: hsl(270, 30%, 60%);
-  --color-primary-400: hsl(270, 20%, 85%);
-  --color-primary-foreground: hsl(20, 30%, 95%);
+  --color-primary: hsl(270, 0%, 60%); /* saturation 30 */
+  --color-primary-400: hsl(270, 0%, 85%); /* saturation 20 */
+  --color-primary-foreground: hsl(20, 0%, 95%); /* saturation 30 */
 
   /* FONT */
   --font-primary: Rajdhani, system-ui;

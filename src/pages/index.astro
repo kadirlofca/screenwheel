@@ -1,13 +1,27 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseHead from "../components/BaseHead.astro";
 import WheelMenu from "../components/reactive/WheelMenu.svelte";
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Section from "../components/reactive/Section.svelte";
+import siteData from "../data/site.json";
+import { getCollection } from 'astro:content';
+
+const sections = (await getCollection('sections')).sort(
+  (a, b) => b.data.order - a.data.order,
+);
 ---
 
-<BaseLayout pageTitle={SITE_TITLE} pageDescription={SITE_DESCRIPTION}>
-	<div class="flex flex-row">
-		<WheelMenu />
-		<div class="flex-1 h-lvh bg-linear-to-tl from-primary/60 to-primary-400">
+<!doctype html>
+<html lang="en" class="bg-primary-400">
+  <head>
+    <BaseHead pageTitle={siteData.siteTitle} pageDescription={siteData.siteDescription} />
+  </head>
+  <body>
+    <main class="min-h-svh">
+		<div class="flex flex-row">
+			<WheelMenu items={sections} />
+			<div class="flex-1 h-lvh bg-linear-to-tl from-primary/60 to-primary-400">
+			</div>
 		</div>
-	</div>
-</BaseLayout>
+    </main>
+  </body>
+</html>
