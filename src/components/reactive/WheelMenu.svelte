@@ -3,11 +3,11 @@
 	import type { CollectionEntry } from "astro:content";
 
 	export let items: CollectionEntry<'sections'>[];
-	let selectedItem: CollectionEntry<'sections'> = items[2];
+	let selectedItem: CollectionEntry<'sections'> = items[0];
 	let scrollContainer: HTMLDivElement;
 
 	function getIndexDistanceToSelectedItem(index: number): number {
-		const selectedIndex = items.findIndex(i => i.data.title === selectedItem.data.title);
+		const selectedIndex = items.findIndex(i => i.id === selectedItem.id);
 		return Math.abs(selectedIndex - index);
 	}
 
@@ -71,25 +71,25 @@
 
 	<div
 		bind:this={scrollContainer}
-		class="relative h-[240px] overflow-y-scroll scrollbar-hide"
-	>
-		<div class="h-[96px] shrink-0 pointer-events-none"></div>
+		class="relative h-full overflow-y-scroll scrollbar-hide">
 
-		<div class="flex flex-col items-end gap-2">
+    	<div class="h-1/2 shrink-0 pointer-events-none"></div>
+
+		<div class="flex flex-col items-end gap-6">
 			{#each items as item, index}
 				<button
 					on:click={(e) => {
 						selectedItem = item;
 						centerElementInView(e.currentTarget);
 					}}
-					class="h-[40px] text-4xl transition-all duration-500 ease-in-out"
+					class="h-[40px] text-5xl transition-all duration-500 ease-in-out"
 					style={
 						"opacity: " +
-						mapValueExponential(getIndexDistanceToSelectedItem(index), 0, items.length, 1, 0.3) +
-						"; transform: rotateX(" +
-						mapValueExponential(getIndexDistanceToSelectedItem(index), 0, items.length, 0, 80, 3) + "deg) " +
+						mapValueExponential(getIndexDistanceToSelectedItem(index), 0, items.length, 1, (-0.05 * items.length)) +
+						// "; transform: rotateX(" +
+						// mapValueExponential(getIndexDistanceToSelectedItem(index), 0, items.length, 0, 80, 3) + "deg) " +
                         "; font-size: " + 
-                        mapValueExponential(getIndexDistanceToSelectedItem(index), 0, items.length, 2.5, 2) + "rem"
+                        mapValueExponential(getIndexDistanceToSelectedItem(index), 0, items.length, 3, 2) + "rem"
 					}
 				>
 					{item.data.title}
@@ -97,7 +97,8 @@
 			{/each}
 		</div>
 
-		<div class="h-[96px] shrink-0 pointer-events-none"></div>
+    	<div class="h-1/2 shrink-0 pointer-events-none"></div>
+
 	</div>
 
     <footer>
