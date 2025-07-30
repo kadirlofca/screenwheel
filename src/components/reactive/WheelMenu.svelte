@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import type { CollectionEntry } from "astro:content";
-
+	
 	export let items: CollectionEntry<'sections'>[];
+	export let onSelect: (item: CollectionEntry<'sections'>) => void;
 	let selectedItem: CollectionEntry<'sections'> = items[0];
 	let scrollContainer: HTMLDivElement;
 
@@ -86,6 +87,7 @@
 			const closest = getClosestItemToCenter();
 			if (closest && closest.id !== selectedItem.id) {
 				selectedItem = closest;
+				onSelect(selectedItem);
 			}
 		}, 1);
 	}
@@ -117,11 +119,12 @@
 					on:click={(e) => {
 						selectedItem = item;
 						centerElementInView(e.currentTarget);
+						onSelect(item);
 					}}
 					class="transition-all text-5xl cursor-pointer sm:hover:-translate-x-2"
 					style={
 						"opacity: " +
-						mapValueExponential(Math.abs(index - selectedIndex), 0, items.length, 1, (-0.06 * items.length), 1.5) +
+						mapValueExponential(Math.abs(index - selectedIndex), 0, items.length, 1, 0, 0.4 * items.length) +
 						"; transform: rotateX(" +
 						mapValueExponential(Math.abs(index - selectedIndex), 0, items.length, 0, 30, 1) +
 						"deg);" +

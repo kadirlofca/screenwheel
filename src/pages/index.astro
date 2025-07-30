@@ -1,8 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import WheelMenu from "../components/reactive/WheelMenu.svelte";
-import Section from "../components/reactive/Section.svelte";
 import siteData from "../data/site.json";
+import SectionViewer from "../components/reactive/SectionViewer.svelte";
 import { getCollection } from 'astro:content';
 
 const sections = (await getCollection('sections')).sort(
@@ -17,11 +16,7 @@ const sections = (await getCollection('sections')).sort(
   </head>
   <body>
     <main class="min-h-svh">
-		<div class="flex flex-row">
-			<WheelMenu items={sections} client:load />
-			<div class="flex-1 h-lvh bg-linear-to-tl from-primary/60 to-primary-400">
-			</div>
-		</div>
+      <SectionViewer sections={sections} client:load />
     </main>
   </body>
 </html>

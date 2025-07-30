@@ -1,16 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Domine:wght@400..700&display=swap');
 
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "tailwindcss/preflight.css" layer(base);
+
 
 @theme {
   /* COLOR */
-  --color-primary: hsl(270, 0%, 60%); /* saturation 30 */
-  --color-primary-400: hsl(270, 0%, 85%); /* saturation 20 */
-  --color-primary-foreground: hsl(20, 0%, 95%); /* saturation 30 */
+  --color-primary: hsl(270, 30%, 60%);
+  --color-primary-400: hsl(270, 20%, 85%);
+  --color-primary-foreground: hsl(20, 30%, 95%);
 
   /* FONT */
-  --font-primary: Rajdhani, system-ui;
+  --font-primary: Domine, system-ui;
 }
 
 @layer base {
